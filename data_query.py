@@ -19,12 +19,12 @@ temp_f = 1.8*temp_kelvin - 459.4
 s = sqlite3.connect('data.db')
 c = s.cursor()
 
-print(type(temp_f))
-print(type(date))
-print(type(time))
+#print(type(temp_f))
+#print(type(date))
+#print(type(time))
 
 try:
-    c.execute("insert into data values (temp_f, date, time);")
+    c.execute("insert into data values (?,?,?);",(temp_f,date,time))
     s.commit()
 except:
     print('Error storing data in database');
