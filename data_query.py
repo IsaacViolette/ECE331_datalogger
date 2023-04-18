@@ -16,17 +16,16 @@ ser.close()
 #Convert kelvin to fahrenheit
 temp_f = 1.8*temp_kelvin - 459.4
 
+#Open database connection
 s = sqlite3.connect('data.db')
 c = s.cursor()
 
-#print(type(temp_f))
-#print(type(date))
-#print(type(time))
-
+#Insert data into sql database, if it doesn't work, print error message
 try:
     c.execute("insert into data values (?,?,?);",(temp_f,date,time))
     s.commit()
 except:
     print('Error storing data in database');
 
+#Close database connection
 s.close()
