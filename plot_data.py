@@ -10,12 +10,17 @@ dayAgo = datetime.now() - timedelta(hours=24)
 s = sqlite3.connect('data.db')
 c = s.cursor()
 
-data = []
 try:
-    c.execute("select * from data where datetime >= '{dayAgo}'")
-    for row in c.fetchall():
-        print(row[0])
-        print(row[1])
+    c.execute("select * from data where datetime >= '{dayAgo}';")
+    s.commit()
 except:
     print("Could not retrieve data from database")
 
+# data = []
+# for row in c.fetchall():
+#    print(row[0])
+#    print(row[1])
+
+print(c.fetchall())
+
+s.close()
