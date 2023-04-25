@@ -2,9 +2,10 @@
 
 import sqlite3
 import matplotlib.pyplot as plt
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import pytz
 import numpy as np
+from scipy.interpolate import make_interp_spline
 
 time_now = datetime.now()
 dayAgo = datetime.now() - timedelta(hours=24)
@@ -33,17 +34,26 @@ for row in c.fetchall():
 
 s.close()
 
+#plot_time = [date.timestamp() for date in datetime.strptime(time_data, "%Y-%m-%d")]
 
 time_np = np.array(time_data)
 temp_np = np.array(temp_data)
 
 plt.plot(time_np,temp_np)
 
+#X_Y_Spline = make_interp_spline(plot_time,temp_np)
+#X_ = np.linspace(min(plot_time), max(plot_time), 1440)
+#Y_ = X_Y_Spline(X_)
+#plt.plot(X_,Y_)
+
 xticks = np.linspace(0, 1440, 5)
-plt.xticks(xticks,rotation=25,fontsize=10)
+plt.xticks(xticks,rotation=15,fontsize=10)
+
+first = time_np[0]
+last = time_np[-1]
 
 plt.xlabel('Date and Time')
 plt.ylabel('Temperature (F)')
-plt.title('Temperature Over Time')
+plt.title(f'Temperature from {first} to {last}')
 plt.show()
 
