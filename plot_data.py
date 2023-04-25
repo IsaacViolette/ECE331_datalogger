@@ -37,20 +37,25 @@ for row in c.fetchall():
 
 s.close()
 
-datetime_np = np.array(datetime_data)
-temp_np = np.array(temp_data)
-time_np = np.array(time_data)
 
-plt.figure(figsize=(14,6))
-plt.plot(time_np,temp_np)
 
-xticks = np.linspace(0, 1440, 13)
-plt.xticks(xticks,rotation=15,fontsize=10)
 
-plt.xlabel('Time')
-plt.ylabel('Temperature (F)')
-plt.title(f'Temperature from {datetime_np[0]} to {datetime_np[-1]}')
-plt.grid()
-plt.savefig("/var/www/html/temp_plot.png", dpi=250)
+
+#datetime_np = np.array(datetime_data)
+#temp_np = np.array(temp_data)
+#time_np = np.array(time_data)
+
+#plt.figure(figsize=(14,6))
+#plt.plot(time_np,temp_np)
+
+#xticks = np.linspace(0, 1440, 13)
+#plt.xticks(xticks,rotation=15,fontsize=10)
+
+#plt.xlabel('Time')
+#plt.ylabel('Temperature (F)')
+#plt.title(f'Temperature from {datetime_np[0]} to {datetime_np[-1]}')
+#plt.grid()
+#plt.show()
+#plt.savefig("/var/www/html/temp_plot.png", dpi=250)
 
 
