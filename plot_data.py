@@ -4,6 +4,7 @@ import sqlite3
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta, timezone
 import pytz
+import numpy as np
 
 time_now = datetime.now()
 dayAgo = datetime.now() - timedelta(hours=24)
@@ -17,7 +18,8 @@ try:
 except:
     print("Could not retrieve data from database")
 
-data = []
+time_data = []
+temp_data = []
 for row in c.fetchall():
     temp_f = (row[1] - 273.15) * 9/5 + 32
     UTC_time = datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S.%f')
@@ -26,8 +28,17 @@ for row in c.fetchall():
     EST_tz = pytz.timezone('US/Eastern')
     EST_time = UTC_time.astimezone(EST_tz)
     EST_time_string = EST_time.strftime('%Y-%m-%d %H:%M:%S.%f')
-    data.append((EST_time_string, temp_f))
-
-print(data)
+    time_data.append(EST_time_string)
+    temp_data.append(temp_f)
 
 s.close()
+
+time_np = np.array(time_data)
+temp_np = np.array(temp_data)
+
+plt.plot(time_np,temp_np)
+plt.xlabel('Date and Time')
+plt.ylabel('Temperature (F)')
+plt.title('Temperature Over Time')
+plt.show()
+
