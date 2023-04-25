@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import pytz
 import numpy as np
-#from scipy.interpolate import make_interp_spline
 
 def data_plot():
     time_now = datetime.now()
@@ -30,7 +29,7 @@ def data_plot():
         UTC_time = UTC_tz.localize(UTC_time)
         EST_tz = pytz.timezone('US/Eastern')
         EST_time = UTC_time.astimezone(EST_tz)
-        EST_datetime_string = EST_time.strftime('%Y-%m-%d %H:%M')
+        EST_datetime_string = EST_time.strftime('%m-%d %H:%M')
         EST_time_string = EST_time.strftime('%H:%M')
         datetime_data.append(EST_datetime_string)
         temp_data.append(temp_f)
@@ -38,21 +37,20 @@ def data_plot():
 
     s.close()
 
-
     datetime_np = np.array(datetime_data)
     temp_np = np.array(temp_data)
     time_np = np.array(time_data)
 
+
     plt.figure(figsize=(14,6))
-    plt.plot(time_np,temp_np)
+    plt.plot(datetime_np,temp_np)
 
     xticks = np.linspace(0, 1440, 13)
-    plt.xticks(xticks,rotation=15,fontsize=10)
+    plt.xticks(xticks,rotation=15,fontsize=8)
 
     plt.xlabel('Time')
     plt.ylabel('Temperature (F)')
     plt.title(f'Temperature from {datetime_np[0]} to {datetime_np[-1]}')
     plt.grid()
+    #plt.show()
     plt.savefig("/var/www/html/temp_plot.png", dpi=250)
-
-
