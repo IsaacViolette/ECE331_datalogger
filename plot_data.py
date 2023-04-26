@@ -63,7 +63,7 @@ def data_plot():
     #15 degrees rotated, 1440 points (1 point = 1 minute, 1440 points in a day)
     xticks = np.linspace(0, 1440, 13)
     plt.xticks(xticks,rotation=15,fontsize=8)
-    
+
     #Make the plot more readible with required labels
     plt.xlabel('Time')
     plt.ylabel('Temperature (F)')
