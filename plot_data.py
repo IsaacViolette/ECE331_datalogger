@@ -63,7 +63,5 @@ plt.ylabel('Temperature (F)')
 plt.title(f'Temperature from {datetime_data[0]} to {datetime_data[-1]}')
 plt.grid()
 
-plt.show()
-
 #Save the plot to the webserver directory where index.php is
 plt.savefig("/var/www/html/temp_plot.png", dpi=250)
